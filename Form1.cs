@@ -50,6 +50,14 @@ namespace P18
             comboBoxRaza.SelectedIndexChanged += comboBoxRaza_SelectedIndexChanged;
 
         }
+        private void comboBoxRaza_SelectedIndexChanged(object sender, EventArgs e)//Para que lo seleccionado en el combo box se asigne en el textBox
+        {
+            // Obtener el valor seleccionado en el ComboBox
+            string razaSeleccionada = comboBoxRaza.SelectedItem.ToString();
+
+            // Establecer el valor en el TextBox
+            textBoxRaza.Text = razaSeleccionada;
+        }
         //Metodo para comprobar si la conexion fue o no exitosa
         private void buttonPrueba_Click(object sender, EventArgs e)
         {
@@ -69,14 +77,6 @@ namespace P18
         private void buttonCargar_Click(object sender, EventArgs e)
         {
             dataGridViewPersonajes.DataSource = personaje.LeerPersonajes();
-        }
-        private void comboBoxRaza_SelectedIndexChanged(object sender, EventArgs e)//Para que lo seleccionado en el combo box se asigne en el textBox
-        {
-            // Obtener el valor seleccionado en el ComboBox
-            string razaSeleccionada = comboBoxRaza.SelectedItem.ToString();
-
-            // Establecer el valor en el TextBox
-            textBoxRaza.Text = razaSeleccionada;
         }
 
         //Para insertar nuevos personajes
@@ -156,6 +156,7 @@ namespace P18
                 textBoxRaza.Clear();
                 numericUpDownNiveldePoder.ResetText();
                 textBoxHistoria.Clear();
+                textBoxID.Clear();
                 personaje.ActualizarPersonaje(id, nombre, raza, nivelPoder, historia);
                 dataGridViewPersonajes.DataSource = personaje.LeerPersonajes();
             }
@@ -176,6 +177,7 @@ namespace P18
                 personaje.EliminarPersonaje(id);
                 MessageBox.Show("Se elimino el personaje correctamente");
                 dataGridViewPersonajes.DataSource = personaje.LeerPersonajes();
+                textBoxID.Clear();
             }
             else
             {
